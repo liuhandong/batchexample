@@ -1,0 +1,22 @@
+WARN :2019-05-14 15:48:35:234  o.m.s.m.ClassPathMapperScanner - No MyBatis mapper was found in '[com.soni.mybatis]' package. Please check your configuration.
+DEBUG:2019-05-14 15:48:35:605  o.m.s.SqlSessionFactoryBean - Parsed configuration file: 'class path resource [mybatis-config.xml]'
+DEBUG:2019-05-14 15:48:35:606  o.m.s.SqlSessionFactoryBean - Property 'mapperLocations' was not specified or no matching resources found
+INFO :2019-05-14 15:48:35:939  o.s.b.c.r.s.JobRepositoryFactoryBean - No database type set, using meta data indicating: MYSQL
+INFO :2019-05-14 15:48:36:362  o.h.v.i.u.Version - HV000001: Hibernate Validator 6.0.14.Final
+WARN :2019-05-14 15:48:36:796  o.s.b.c.c.a.DefaultBatchConfigurer - No transaction manager was provided, using a DataSourceTransactionManager
+INFO :2019-05-14 15:48:36:818  o.s.b.c.r.s.JobRepositoryFactoryBean - No database type set, using meta data indicating: MYSQL
+INFO :2019-05-14 15:48:36:824  o.s.b.c.l.s.SimpleJobLauncher - No TaskExecutor has been set, defaulting to synchronous executor.
+INFO :2019-05-14 15:48:37:181  o.s.b.c.l.s.SimpleJobLauncher - Job: [SimpleJob: [name=personJob]] launched with the following parameters: [{}]
+INFO :2019-05-14 15:48:37:339  o.s.b.c.j.SimpleStepHandler - Step already complete or not restartable, so no action to execute: StepExecution: id=3, version=3, name=step1, status=COMPLETED, exitStatus=COMPLETED, readCount=4, filterCount=0, writeCount=4 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=1, rollbackCount=0, exitDescription=
+INFO :2019-05-14 15:48:37:385  o.s.b.c.l.s.SimpleJobLauncher - Job: [SimpleJob: [name=personJob]] completed with the following parameters: [{}] and the following status: [COMPLETED]
+WARN :2019-05-14 15:51:13:144  o.m.s.m.ClassPathMapperScanner - No MyBatis mapper was found in '[com.soni.mybatis]' package. Please check your configuration.
+DEBUG:2019-05-14 15:51:15:568  o.m.s.SqlSessionFactoryBean - Parsed configuration file: 'class path resource [mybatis-config.xml]'
+DEBUG:2019-05-14 15:51:15:571  o.m.s.SqlSessionFactoryBean - Property 'mapperLocations' was not specified or no matching resources found
+INFO :2019-05-14 15:51:17:643  o.s.b.c.r.s.JobRepositoryFactoryBean - No database type set, using meta data indicating: MYSQL
+INFO :2019-05-14 15:51:24:970  o.h.v.i.u.Version - HV000001: Hibernate Validator 6.0.14.Final
+WARN :2019-05-14 15:51:25:864  o.s.b.c.c.a.DefaultBatchConfigurer - No transaction manager was provided, using a DataSourceTransactionManager
+INFO :2019-05-14 15:51:25:883  o.s.b.c.r.s.JobRepositoryFactoryBean - No database type set, using meta data indicating: MYSQL
+INFO :2019-05-14 15:51:25:897  o.s.b.c.l.s.SimpleJobLauncher - No TaskExecutor has been set, defaulting to synchronous executor.
+INFO :2019-05-14 15:51:26:392  o.s.b.c.l.s.SimpleJobLauncher - Job: [SimpleJob: [name=personJob]] launched with the following parameters: [{}]
+INFO :2019-05-14 15:51:26:605  o.s.b.c.j.SimpleStepHandler - Step already complete or not restartable, so no action to execute: StepExecution: id=3, version=3, name=step1, status=COMPLETED, exitStatus=COMPLETED, readCount=4, filterCount=0, writeCount=4 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=1, rollbackCount=0, exitDescription=
+INFO :2019-05-14 15:51:26:658  o.s.b.c.l.s.SimpleJobLauncher - Job: [SimpleJob: [name=personJob]] completed with the following parameters: [{}] and the following status: [COMPLETED]

@@ -1,0 +1,61 @@
+<!--?xml version="1.0" encoding="UTF-8" ?-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sony.ifbatch.sample.repository.SuperModelRepository">
+    <resultMap id="BaseResultMap" type="com.sony.ifbatch.sample.entity.SuperModelEntity">
+        <result column="LOCALE_ID" jdbcType="VARCHAR" property="localeId"/>
+        <result column="SuperModelId" jdbcType="VARCHAR" property="superModelId"/>
+        <result column="BizID" jdbcType="VARCHAR" property="bizID"/>
+        <result column="WebPageSunriseDate" jdbcType="VARCHAR" property="webPageSunriseDate"/>
+        <result column="WebPageSunsetDate" jdbcType="VARCHAR" property="webPageSunsetDate"/>
+        <result column="PvtKey" jdbcType="VARCHAR" property="pvtKey"/>
+        <result column="ExternalId" jdbcType="VARCHAR" property="externalId"/>
+        <result column="Tier" jdbcType="VARCHAR" property="tier"/>
+    </resultMap>
+    
+   <select id="selectSuperModelAll" resultMap="BaseResultMap">
+       SELECT
+           Locale_ID,
+           SuperModelId,
+           BizID,
+           WebPageSunriseDate,
+		   WebPageSunsetDate,
+		   PvtKey,
+		   ExternalId,
+		   Tier
+       FROM
+           SuperModel
+    </select>
+
+   <select id="selectSuperModel" resultMap="BaseResultMap">
+       SELECT
+           Locale_ID,
+           SuperModelId,
+           BizID,
+           WebPageSunriseDate,
+		   WebPageSunsetDate,
+		   PvtKey,
+		   ExternalId,
+		   Tier
+       FROM
+           SuperModel
+       WHERE
+           Locale_ID = #{localeId}
+       AND
+           SuperModelId = #{superModelId}
+    </select>
+    
+    <update id="updateSuperModel" parameterType="com.sony.ifbatch.sample.entity.SuperModelEntity">
+        update SuperModel 
+        set 
+           Locale_ID=#{localeId},
+           SuperModelId=#{superModelId},
+           BizID=#{bizID},
+           WebPageSunriseDate=now(),
+		   WebPageSunsetDate=now(),
+		   PvtKey=#{pvtKey},
+		   ExternalId=#{externalId},
+		   Tier=#{tier}
+		where 
+		 superModelId=#{superModelId,jdbcType=VARCHAR}
+    </update>
+</mapper>
