@@ -1,5 +1,8 @@
 package com.sony.ifbatch.db2csv.job;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.mybatis.spring.batch.builder.MyBatisCursorItemReaderBuilder;
 import org.springframework.batch.core.Job;
@@ -10,16 +13,27 @@ import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.batch.item.validator.BeanValidatingItemProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
+import com.sony.ifbatch.adapter.ServiceAdapterReader;
+import com.sony.ifbatch.adapter.ServiceAdapterWriter;
 import com.sony.ifbatch.base.job.BaseJob;
+import com.sony.ifbatch.builder.ServiceAdapterReaderBuilder;
+import com.sony.ifbatch.builder.ServiceAdapterWriterBuilder;
 import com.sony.ifbatch.sample.entity.SuperModelEntity;
+import com.sony.ifbatch.sample.job.Person;
+import com.sony.ifbatch.sample.service.DbToDbService;
 import com.sony.log.ItemFailureLoggerListener;
 
 @Component
 public class DbToCsvJob extends BaseJob {
+	
+	@Autowired
+	DbToDbService dbToDbService;
+	
 
 	@Bean
 	public Job dbToCsvJobBean() {//Job name is unique in all bean
@@ -33,11 +47,15 @@ public class DbToCsvJob extends BaseJob {
                 .transactionManager(transactionManager)
                 .listener(new ItemFailureLoggerListener())
                 .<SuperModelEntity,SuperModelEntity>chunk(2)
-                .reader(reader())
+                .reader(serviceReader())
                 //.processor(processor())
                 //.processor(beanValidatingItemProcessor())
-                .writer(writer())
+                .writer(serviceWriter())
                 .build();
+    }
+    
+    public ServiceAdapterReader<SuperModelEntity> serviceReader() {    	
+    	return new ServiceAdapterReaderBuilder<SuperModelEntity>().list(dbToDbService.selectSuperModelAll()).build();
     }
     
     public ItemProcessor<? super SuperModelEntity, ? extends SuperModelEntity> processor() {
@@ -70,16 +88,14 @@ public class DbToCsvJob extends BaseJob {
                       }});
                   }})
     		      .build();
+    } 
+    
+    public ServiceAdapterWriter<SuperModelEntity,SuperModelEntity> serviceWriter() {
+    	
+    	return new ServiceAdapterWriterBuilder<SuperModelEntity,SuperModelEntity>()
+    			.serviceIds("com.sony.ifbatch.sample.service.DbToDbService.updateSuperModel")//mutil ids
+    			.entity(new SuperModelEntity(), "com.sony.ifbatch.sample.service.DbToDbService.updateSuperModel")//desc object
+	            .builder();
     }
-    
-
-    
-//    @Bean
-//    public ItemReaderAdapter<SuperModelEntity> itemReader() {
-//	    ItemReaderAdapter<SuperModelEntity> reader = new ItemReaderAdapter<>();
-//	    reader.setTargetObject(dbToDbService);
-//	    reader.setTargetMethod("selectSuperModelAll");
-//	    return reader;
-//    }
 
 }

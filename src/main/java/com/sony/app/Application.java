@@ -12,6 +12,7 @@ import com.sony.config.BatchConfig;
 import com.sony.config.DBConfig;
 
 public class Application implements CommandLineRunner {
+	public static AnnotationConfigApplicationContext context = null;
 	
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 	
@@ -25,18 +26,18 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... jobname) throws Exception {
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        ctx.register(DBConfig.class,BatchConfig.class);
-        ctx.refresh();
-        JobLauncher  jobLauncher = ctx.getBean(JobLauncher.class);
+		context = new AnnotationConfigApplicationContext();
+        context.register(DBConfig.class,BatchConfig.class);
+        context.refresh();
+        JobLauncher  jobLauncher = context.getBean(JobLauncher.class);
         //case: one job name 
-        Job job = (Job)ctx.getBean(jobname[0]);
+        Job job = (Job)context.getBean(jobname[0]);
         try {
             jobLauncher.run(job, new JobParameters());
         } catch (Exception e) {
         	logger.error("Has job exception occur! ",e);
         }
-        ctx.close();
+        context.close();
 	}
 
 }

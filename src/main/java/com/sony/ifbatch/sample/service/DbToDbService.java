@@ -17,5 +17,9 @@ public class DbToDbService {
 	public List<SuperModelEntity> selectSuperModelAll() {
 		return superModelRepository.selectSuperModelAll();
 	}
+	
+	public int updateSuperModel(SuperModelEntity superModelEntity) {
+		return superModelRepository.updateSuperModel(superModelEntity);
+	}
 
 }

@@ -7,12 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.util.StringUtils;
+
+import com.sony.ifbatch.common.exception.SystemException;
 
 @Configuration
 @PropertySource(value={"classpath:application.properties"})
@@ -32,10 +34,12 @@ public class DBConfig {
     private String mapperLocations;
     @Value("${mybatis.mybatis-config}")
     private String mybatisConfig;	
+    @Value("${spring.datasource.tried-num}")
+    private String triedNum;
     
     @Bean
-    public DriverManagerDataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    public DriverManagerDataSource dataSource() {    	
+    	DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(jdbcname);
         dataSource.setUrl(url);
         dataSource.setUsername(user);
